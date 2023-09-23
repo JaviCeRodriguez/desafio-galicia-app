@@ -10,20 +10,23 @@ import {
 } from "@chakra-ui/react";
 import {
   FiHome,
-  FiTrendingUp,
+  // FiTrendingUp,
   FiCompass,
   FiStar,
   FiPhone,
 } from "react-icons/fi";
 import { IconType } from "react-icons";
+import { Link } from "react-router-dom";
 
 interface LinkItemProps {
   name: string;
   icon: IconType;
+  path: string;
 }
 
 interface NavItemProps extends FlexProps {
   icon: IconType;
+  path: string;
   children: React.ReactNode;
 }
 
@@ -32,21 +35,16 @@ interface SidebarProps extends BoxProps {
 }
 
 const LinkItems: Array<LinkItemProps> = [
-  { name: "Inicio", icon: FiHome },
-  { name: "Recomendados", icon: FiTrendingUp },
-  { name: "Explorar", icon: FiCompass },
-  { name: "Favoritos", icon: FiStar },
-  { name: "Contáctanos", icon: FiPhone },
+  { name: "Inicio", icon: FiHome, path: "/" },
+  // { name: "Recomendados", icon: FiTrendingUp, path: "/recomendados" },
+  { name: "Explorar", icon: FiCompass, path: "/explorar" },
+  { name: "Favoritos", icon: FiStar, path: "/favoritos" },
+  { name: "Contáctanos", icon: FiPhone, path: "/contacto" },
 ];
 
-const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
+const NavItem = ({ icon, path, children, ...rest }: NavItemProps) => {
   return (
-    <Box
-      as="a"
-      href="#"
-      style={{ textDecoration: "none" }}
-      _focus={{ boxShadow: "none" }}
-    >
+    <Link to={path} style={{ textDecoration: "none" }}>
       <Flex
         align="center"
         p="4"
@@ -72,7 +70,7 @@ const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
         )}
         {children}
       </Flex>
-    </Box>
+    </Link>
   );
 };
 
@@ -95,7 +93,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
         <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
-        <NavItem key={link.name} icon={link.icon}>
+        <NavItem key={link.name} icon={link.icon} path={link.path}>
           {link.name}
         </NavItem>
       ))}

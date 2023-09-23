@@ -1,3 +1,4 @@
+import { Outlet } from "react-router-dom";
 import {
   Box,
   useColorModeValue,
@@ -8,11 +9,7 @@ import {
 import MobileNav from "../../section/navbar";
 import SidebarContent from "../../section/sidebar";
 
-type MainLayoutProps = {
-  children: React.ReactNode;
-};
-
-const MainLayout = ({ children }: MainLayoutProps) => {
+const MainLayout = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -36,7 +33,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
       {/* mobilenav */}
       <MobileNav onOpen={onOpen} />
       <Box ml={{ base: 0, md: 60 }} p="4">
-        {children}
+        <Outlet />
       </Box>
     </Box>
   );
