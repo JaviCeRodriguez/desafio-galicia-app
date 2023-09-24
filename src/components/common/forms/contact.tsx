@@ -9,8 +9,32 @@ import {
   Text,
   Textarea,
 } from "@chakra-ui/react";
+import { ContactDetails } from "../../../models/common";
 
-const ContactForm = () => {
+type Props = {
+  contact: ContactDetails;
+  setContact: (value: ContactDetails) => void;
+  onSubmit: () => void;
+};
+
+const ContactForm = ({ contact, setContact, onSubmit }: Props) => {
+  const handleOnSubmit = (event: any) => {
+    event.preventDefault();
+
+    if (!contact.email || !contact.texto) {
+      return;
+    }
+
+    onSubmit();
+  };
+
+  const handleOnChange = (event: any) => {
+    setContact({
+      ...contact,
+      [event.target.name]: event.target.value,
+    });
+  };
+
   return (
     <Flex align="center" justify="center">
       <Stack
@@ -35,14 +59,24 @@ const ContactForm = () => {
             placeholder="tuemail@gmail.com"
             _placeholder={{ color: "gray.500" }}
             type="email"
+            name="email"
+            onChange={handleOnChange}
           />
         </FormControl>
         <FormControl id="texto" isRequired>
           <FormLabel>Escríbenos!</FormLabel>
-          <Textarea resize="none" placeholder="Escribe aquí tu mensaje" />
+          <Textarea
+            resize="none"
+            name="texto"
+            placeholder="Escribe aquí tu mensaje"
+            _placeholder={{ color: "gray.500" }}
+            onChange={handleOnChange}
+          />
         </FormControl>
         <Stack spacing={6}>
           <Button
+            type="button"
+            onClick={handleOnSubmit}
             bg="blue.400"
             color="white"
             _hover={{

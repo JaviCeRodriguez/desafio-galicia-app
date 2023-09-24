@@ -7,3 +7,8 @@ export type Tenencia = {
   canal: number;
   coberturas: Cobertura[];
 };
+
+export type ContactDetails = {
+  email: string;
+  texto: string;
+};
