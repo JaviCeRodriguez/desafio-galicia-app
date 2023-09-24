@@ -12,6 +12,7 @@ import {
   ListItem,
   List,
   ListIcon,
+  Image,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
@@ -37,6 +38,15 @@ const TenenciaModal = ({ isOpen, tenencia, onClose }: Props) => {
               Canal: {tenencia.canal}
             </Heading>
           </Stack>
+          <Image
+            borderRadius="md"
+            h="250px"
+            w="100%"
+            objectFit="cover"
+            objectPosition="top"
+            src="insurance-img-modal.webp"
+            alt={tenencia.nombre}
+          />
         </ModalHeader>
         <ModalCloseButton />
         <ModalBody>
