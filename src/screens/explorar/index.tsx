@@ -1,6 +1,3 @@
-import { useState } from "react";
-import { Tenencia } from "../models/common";
-import { useFavoriteStore } from "../store/favoriteStore";
 import {
   Box,
   Container,
@@ -9,15 +6,17 @@ import {
   Heading,
   Stack,
 } from "@chakra-ui/react";
-import TenenciaModal from "../components/common/modals/tenencia";
 import { StarIcon } from "@chakra-ui/icons";
+import { tenenciaHistorica } from "../../mocks/tenencias";
+import { useState } from "react";
+import { Tenencia } from "../../models/common";
+import TenenciaModal from "../../components/common/modals/tenencia";
+import { useFavoriteStore } from "../../store/favoriteStore";
 
-const Favorites = () => {
+const Explore = () => {
   const [tenencia, setTenencia] = useState<Tenencia | null>(null);
   const [isOpen, setIsOpen] = useState(false);
-  const tenenciasStored: Tenencia[] = useFavoriteStore(
-    (state) => state.tenencias
-  );
+  const tenenciasStored = useFavoriteStore((state) => state.tenencias);
   const addFavorite = useFavoriteStore((state) => state.addFavorite);
   const removeFavorite = useFavoriteStore((state) => state.removeFavorite);
 
@@ -44,7 +43,7 @@ const Favorites = () => {
         }}
         gap={4}
       >
-        {tenenciasStored.map((tenencia) => {
+        {tenenciaHistorica.map((tenencia) => {
           const isFavorite = tenenciasStored.find((t) => t.id === tenencia.id);
 
           return (
@@ -87,4 +86,4 @@ const Favorites = () => {
   );
 };
 
-export default Favorites;
+export default Explore;

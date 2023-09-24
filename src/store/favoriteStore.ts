@@ -1,20 +1,23 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { Tenencia } from "../models/common";
 
 type Favorite = {
-  product: any[];
+  tenencias: Tenencia[];
+  addFavorite: (tenencia: Tenencia) => void;
+  removeFavorite: (id: number) => void;
 };
 
 export const useFavoriteStore = create<Favorite>()(
   persist(
     (set) => ({
-      product: [],
-      addFavorite: (product: any) =>
-        set((state) => ({ product: [...state.product, product] })),
-      removeFavorite: (id: string) =>
+      tenencias: [],
+      addFavorite: (tenencia: Tenencia) =>
+        set((state) => ({ tenencias: [...state.tenencias, tenencia] })),
+      removeFavorite: (id: number) =>
         set((state) => ({
-          product: state.product.filter((item) => item.id !== id),
+          tenencias: state.tenencias.filter((tenencia) => tenencia.id !== id),
         })),
     }),
     {
