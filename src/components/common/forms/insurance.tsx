@@ -3,25 +3,25 @@ import {
   Flex,
   FormControl,
   FormLabel,
-  Heading,
   Input,
   Stack,
-  Text,
   Textarea,
 } from "@chakra-ui/react";
-import { ContactDetails } from "../../../models/common";
+import { InsuranceDetails } from "../../../models/common";
 
 type Props = {
-  contact: ContactDetails;
-  setContact: (value: ContactDetails) => void;
+  contact: InsuranceDetails;
+  id: string;
+  code: string;
+  setContact: (value: InsuranceDetails) => void;
   onSubmit: () => void;
 };
 
-const ContactForm = ({ contact, setContact, onSubmit }: Props) => {
+const InsuranceForm = ({ contact, code, id, setContact, onSubmit }: Props) => {
   const handleOnSubmit = (event: any) => {
     event.preventDefault();
 
-    if (!contact.email || !contact.texto) {
+    if (!contact.email) {
       return;
     }
 
@@ -40,19 +40,12 @@ const ContactForm = ({ contact, setContact, onSubmit }: Props) => {
       <Stack
         spacing={4}
         w="full"
-        maxW="xl"
+        maxW="3xl"
         bg="white"
         rounded="xl"
         boxShadow="lg"
         p={6}
       >
-        <Heading lineHeight={1.1} fontSize={{ base: "2xl", md: "3xl" }}>
-          Contáctanos!
-        </Heading>
-        <Text fontSize={{ base: "sm", sm: "md" }} color={"gray.500"}>
-          Ante cualquier duda, consulta o sugerencia, no dudes en contactarnos!
-          Estamos para ayudarte 😉
-        </Text>
         <FormControl id="email" isRequired>
           <FormLabel>Tu dirección de e-mail</FormLabel>
           <Input
@@ -63,8 +56,37 @@ const ContactForm = ({ contact, setContact, onSubmit }: Props) => {
             onChange={handleOnChange}
           />
         </FormControl>
-        <FormControl id="texto" isRequired>
-          <FormLabel>Escríbenos!</FormLabel>
+        <Stack
+          direction={{
+            base: "column",
+            lg: "row",
+          }}
+        >
+          <FormControl id="code" isRequired>
+            <FormLabel>Código</FormLabel>
+            <Input
+              placeholder="Código"
+              _placeholder={{ color: "gray.500" }}
+              type="text"
+              name="code"
+              value={code}
+              disabled
+            />
+          </FormControl>
+          <FormControl id="id" isRequired>
+            <FormLabel>ID</FormLabel>
+            <Input
+              placeholder="ID"
+              _placeholder={{ color: "gray.500" }}
+              type="text"
+              name="id"
+              value={id}
+              disabled
+            />
+          </FormControl>
+        </Stack>
+        <FormControl id="texto">
+          <FormLabel>Consultas? Escribinos!</FormLabel>
           <Textarea
             resize="none"
             name="texto"
@@ -91,4 +113,4 @@ const ContactForm = ({ contact, setContact, onSubmit }: Props) => {
   );
 };
 
-export default ContactForm;
+export default InsuranceForm;

@@ -12,3 +12,8 @@ export type ContactDetails = {
   email: string;
   texto: string;
 };
+
+export type InsuranceDetails = {
+  email: string;
+  texto: string;
+};
