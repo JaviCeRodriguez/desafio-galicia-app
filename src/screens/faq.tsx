@@ -53,7 +53,7 @@ const Faq = () => {
   return (
     <Container maxW="container.xl">
       <Heading as="h1" size="lg" mb={4}>
-        FAQ
+        Preguntas frecuentes
       </Heading>
 
       <Flex justifyContent="center">
