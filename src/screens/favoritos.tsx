@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { Tenencia } from "../models/common";
-import { useFavoriteStore } from "../store/favoriteStore";
+import { ArrowForwardIcon, StarIcon } from "@chakra-ui/icons";
 import {
   Box,
   Container,
@@ -13,7 +12,9 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import TenenciaModal from "../components/common/modals/tenencia";
-import { ArrowForwardIcon, StarIcon } from "@chakra-ui/icons";
+import Warning from "../components/common/notifications/warning";
+import { useFavoriteStore } from "../store/favoriteStore";
+import { Tenencia } from "../models/common";
 
 const Favorites = () => {
   const [tenencia, setTenencia] = useState<Tenencia | null>(null);
@@ -28,6 +29,10 @@ const Favorites = () => {
     setTenencia(tenencia);
     setIsOpen(true);
   };
+
+  if (tenenciasStored.length === 0) {
+    return <Warning />;
+  }
 
   return (
     <Container maxW="container.xl">
