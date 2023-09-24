@@ -7,10 +7,13 @@ import {
   Grid,
   GridItem,
   Heading,
+  List,
+  ListIcon,
+  ListItem,
   Stack,
 } from "@chakra-ui/react";
 import TenenciaModal from "../components/common/modals/tenencia";
-import { StarIcon } from "@chakra-ui/icons";
+import { ArrowForwardIcon, StarIcon } from "@chakra-ui/icons";
 
 const Favorites = () => {
   const [tenencia, setTenencia] = useState<Tenencia | null>(null);
@@ -57,27 +60,44 @@ const Favorites = () => {
               onClick={() => handleOpenModal(tenencia)}
               cursor="pointer"
             >
-              <Stack
-                direction="row"
-                justifyContent="space-between"
-                alignItems="center"
-              >
-                <Heading as="h6" size="xs" fontWeight={500}>
-                  {tenencia.nombre} / Canal {tenencia.canal}
-                </Heading>
-
-                <Box
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    if (isFavorite) {
-                      removeFavorite(tenencia.id);
-                    } else {
-                      addFavorite(tenencia);
-                    }
-                  }}
+              <Stack>
+                <Stack
+                  direction="row"
+                  justifyContent="space-between"
+                  alignItems="center"
                 >
-                  <StarIcon color={isFavorite ? "yellow.400" : "gray.400"} />
-                </Box>
+                  <Heading as="h6" size="xs" fontWeight={500}>
+                    {tenencia.nombre} / Canal {tenencia.canal}
+                  </Heading>
+
+                  <Box
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      if (isFavorite) {
+                        removeFavorite(tenencia.id);
+                      } else {
+                        addFavorite(tenencia);
+                      }
+                    }}
+                  >
+                    <StarIcon color={isFavorite ? "yellow.400" : "gray.400"} />
+                  </Box>
+                </Stack>
+                <List>
+                  {tenencia.coberturas.map((cobertura, index) => (
+                    <ListItem
+                      key={index}
+                      display="flex"
+                      flexDirection="row"
+                      cursor="pointer"
+                    >
+                      <ListIcon as={ArrowForwardIcon} color="blue.500" />
+                      <Heading as="h6" size="xs" fontWeight={500}>
+                        {cobertura}
+                      </Heading>
+                    </ListItem>
+                  ))}
+                </List>
               </Stack>
             </GridItem>
           );
