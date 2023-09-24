@@ -14,6 +14,7 @@ import {
   FiCompass,
   FiStar,
   FiPhone,
+  FiHelpCircle,
 } from "react-icons/fi";
 import { IconType } from "react-icons";
 import { Link } from "react-router-dom";
@@ -40,6 +41,7 @@ const LinkItems: Array<LinkItemProps> = [
   { name: "Explorar", icon: FiCompass, path: "/explorar" },
   { name: "Favoritos", icon: FiStar, path: "/favoritos" },
   { name: "Contáctanos", icon: FiPhone, path: "/contacto" },
+  { name: "FAQ", icon: FiHelpCircle, path: "/faq" },
 ];
 
 const NavItem = ({ icon, path, children, ...rest }: NavItemProps) => {
@@ -53,7 +55,7 @@ const NavItem = ({ icon, path, children, ...rest }: NavItemProps) => {
         role="group"
         cursor="pointer"
         _hover={{
-          bg: "cyan.400",
+          bg: "blue.400",
           color: "white",
         }}
         {...rest}
